@@ -1,0 +1,375 @@
+Question 1: What is Pandas, and why is it commonly used in data cleaning tasks?
+
+Ans:- Pandas is a powerful open-source Python library used for data manipulation, analysis, and cleaning.
+It provides easy-to-use data structures and tools for working with structured data, particularly tabular and time series data.
+
+Here's why Pandas is commonly used in data cleaning tasks:
+
+1. Data Structures:
+      Pandas offers two primary data structures: Series and DataFrame.
+      The DataFrame is especially useful for cleaning data as it represents tabular data with rows and columns, akin to a spreadsheet or database table.
+      This structure allows for easy indexing, slicing, and manipulation of data.
+
+2. Handling Missing Data:
+        Real-world datasets often have missing or incomplete data. 
+        Pandas provides convenient methods like 'isnull()', 'dropna()', and 'fillna()' to identify, remove, or replace missing values, making data
+        cleaning more manageable.
+
+3. Data Alignment and Merging: 
+         Pandas enables the alignment of disparate datasets based on labels or indices, allowing for seamless merging, joining, and concatenation of datasets.
+         This is crucial when working with multiple data sources or when combining datasets with different structures.
+
+4. Data Filtering and Selection:
+         Pandas offers powerful methods to filter rows or columns based on specific conditions ('loc', 'iloc'), enabling data cleaning by selecting or
+         excluding specific subsets of data.
+
+5. Data Transformation:
+         With Pandas, it's easy to transform data by applying functions to entire columns or rows. 
+         This includes operations like converting data types, scaling, normalizing, or applying custom functions.
+
+6. Handling Time Series Data:
+         For time series analysis, Pandas provides specialized functionality for working with dates and times, making it simpler to manipulate time-indexed data.
+
+7. Efficient I/O Operations:
+         Pandas supports reading and writing data from various file formats such as CSV, Excel, SQL databases, JSON, and more. 
+         This allows seamless interaction with different data sources.
+
+8. Statistical Analysis:
+        Pandas offers numerous statistical functions and methods to perform summary statistics, aggregation, and computation of descriptive statistics,
+        aiding in data exploration and understanding.
+
+Overall, Pandas' flexibility, ease of use, and wide range of functionalities make it a go-to choice for data scientists, analysts,
+       and researchers for data cleaning and preprocessing tasks before further analysis or modeling.
+
+################################################################################################################################################################
+
+Question 2: Given a DataFrame with missing values, how would you check for missing values in each column and count the total number of missing values?
+
+Ans:- 
+      In Pandas, you can use the 'isnull()' method along with the 'sum()' method to check for missing values in each column of a DataFrame and
+       count the total number of missing values. Here's an example:
+
+ # python Code
+import pandas as pd
+
+# Example DataFrame with missing values
+data = {
+    'A': [1, 2, None, 4, 5],
+    'B': [None, 10, 11, 12, 13],
+    'C': ['a', 'b', 'c', None, 'e']
+}
+
+df = pd.DataFrame(data)
+
+# Check for missing values in each column
+missing_per_column = df.isnull().sum()
+
+# Count the total number of missing values
+total_missing = df.isnull().sum().sum()
+
+print("Missing values per column:")
+print(missing_per_column)
+print("\nTotal number of missing values:", total_missing)
+
+
+This code snippet demonstrates how to:
+
+1. Use 'df.isnull()' to create a DataFrame of boolean values where 'True' indicates a missing value.
+2. Apply '.sum()' along the columns ('axis=0' by default) to get the count of missing values in each column.
+3. Use '.sum()' again on the resulting Series to calculate the total number of missing values across all columns.
+
+##############################################################################################################################################################
+
+Question 3: How can you remove duplicates from a DataFrame while retaining the first occurrence of each unique row?
+
+Ans:- 
+     In Pandas, you can remove duplicates from a DataFrame while retaining the first occurrence of each unique row using the 'drop_duplicates()' method.
+     By default, this method keeps the first occurrence of a duplicated row and removes subsequent duplicates.
+
+Here's an example:
+
+ # python code
+import pandas as pd
+
+# Example DataFrame with duplicates
+data = {
+    'A': [1, 2, 2, 3, 4, 2],
+    'B': ['x', 'y', 'y', 'z', 'w', 'y'],
+    'C': ['foo', 'bar', 'foo', 'bar', 'foo', 'baz']
+}
+
+df = pd.DataFrame(data)
+
+# Remove duplicates, retaining the first occurrence of each unique row
+df_no_duplicates = df.drop_duplicates()
+
+print("DataFrame after removing duplicates:")
+print(df_no_duplicates)
+
+
+This code snippet demonstrates how to use 'drop_duplicates()' to remove duplicates while retaining the first occurrence of each unique row in the DataFrame 'df'.
+
+#################################################################################################################################################################
+
+Question 4: If you have a DataFrame with a column containing string values, how can you convert all the values in that column to lowercase?
+
+Ans:- 
+     In Pandas, you can convert all the string values in a column to lowercase using the 'str.lower()' method. Here's an example:
+
+# python code
+import pandas as pd
+
+# Example DataFrame
+data = {
+    'Column1': ['Apple', 'Banana', 'Orange', 'Grapes', 'Kiwi'],
+    'Column2': [10, 15, 20, 12, 8]
+}
+
+df = pd.DataFrame(data)
+
+# Convert all values in 'Column1' to lowercase
+df['Column1'] = df['Column1'].str.lower()
+
+print("DataFrame with lowercase values:")
+print(df)
+
+
+In this example, 'df['Column1'].str.lower()' applies the 'lower()' method to all the string values in 'Column1', converting them to lowercase.
+Then, this modified column is assigned back to 'Column1' in the DataFrame 'df'.
+
+Replace ''Column1'' with the name of the column containing the string values that you want to convert to lowercase in your actual DataFrame.
+
+#####################################################################################################################################################################
+
+Question 5: How do you replace  missing values in a DataFrame with a specific value, like 0, for a particular column?
+
+Ans:-
+  In Pandas, you can replace missing values in a DataFrame with a specific value, such as 0, for a particular column using the 'fillna()' method. Here's an example:
+
+# python code
+import pandas as pd
+import numpy as np
+
+# Example DataFrame with missing values
+data = {
+    'A': [1, 2, None, 4, None],
+    'B': [None, 10, 11, 12, 13],
+    'C': ['a', 'b', 'c', None, 'e']
+}
+
+df = pd.DataFrame(data)
+
+# Replace missing values in column 'A' with 0
+df['A'] = df['A'].fillna(0)
+
+print("DataFrame after replacing missing values in column 'A' with 0:")
+print(df)
+
+
+In this example, 'df['A'].fillna(0)' replaces the missing values in column 'A' with the value 0 using the 'fillna()' method.
+The modified column is then assigned back to 'A' in the DataFrame 'df'.
+
+Replace ''A'' with the name of the column where you want to replace missing values with 0 in your actual DataFrame.
+
+##############################################################################################################################################################
+
+Question 6: If you have a DataFrame with a datetime column, how can you extract the year, month, and day into separate columns?
+
+Ans:- 
+    In Pandas, if you have a DataFrame with a datetime column, you can extract the year, month, and day into separate columns using the 'dt' accessor along 
+   with the 'year', 'month', and 'day' properties. Here's an example:
+
+# python code
+import pandas as pd
+
+# Example DataFrame with a datetime column
+data = {
+    'Date': ['2023-11-01', '2022-08-15', '2023-04-22']
+}
+
+df = pd.DataFrame(data)
+
+# Convert 'Date' column to datetime
+df['Date'] = pd.to_datetime(df['Date'])
+
+# Extract year, month, and day into separate columns
+df['Year'] = df['Date'].dt.year
+df['Month'] = df['Date'].dt.month
+df['Day'] = df['Date'].dt.day
+
+print("DataFrame with extracted year, month, and day columns:")
+print(df)
+
+In this example:
+
+1. 'pd.to_datetime()' is used to convert the 'Date' column to a datetime format.
+2. 'df['Date'].dt.year', 'df['Date'].dt.month', and 'df['Date'].dt.day' extract the year, month, and day components from the datetime column 'Date'
+    and create new columns 'Year', 'Month', and 'Day' in the DataFrame 'df'.
+
+Replace ''Date'' with the name of your actual datetime column in your DataFrame to perform the extraction for your specific dataset.
+
+################################################################################################################################################################
+
+Question 7: How can you filter rows in a DataFrame where a specific column's values meet a certain condition (e.g., all rows where 'age' is greater than 30)?
+
+Ans:-
+    In Pandas, you can filter rows in a DataFrame based on a specific column's values using boolean indexing.
+    Here's an example of filtering rows where the 'age' column's values are greater than 30:
+
+ # python  code
+import pandas as pd
+
+# Example DataFrame
+data = {
+    'Name': ['Alice', 'Bob', 'Charlie', 'David', 'Emma'],
+    'Age': [25, 35, 30, 40, 28]
+}
+
+df = pd.DataFrame(data)
+
+# Filter rows where 'Age' is greater than 30
+filtered_df = df[df['Age'] > 30]
+
+print("Filtered DataFrame where 'Age' is greater than 30:")
+print(filtered_df)
+
+
+In this example, 'df['Age'] > 30' creates a boolean mask where 'True' indicates rows where the 'Age' column values are greater than 30. 
+Passing this mask inside square brackets 'df[]' filters the DataFrame, returning only the rows where the condition is 'True'.
+
+Replace ''Age' > 30' with your desired condition, such as ''Age' == 30' for equality, ''Age' < 40' for values less than 40, etc., to filter rows based
+on different conditions in your actual DataFrame.
+
+################################################################################################################################################################
+
+Question 8: What is the purpose of the .apply() function in Pandas, and how would you use it to create a new column based on values from existing columns?
+
+Ans:-
+    The '.apply()' function in Pandas is used to apply a function along an axis of a DataFrame or Series. 
+   It allows you to perform operations on rows or columns using custom or built-in functions.
+
+You can use '.apply()' to create a new column based on values from existing columns by applying a function to each row or
+ column and assigning the result to a new column.
+
+Here's an example demonstrating how to use '.apply()' to create a new column based on values from existing columns:
+
+# python code
+import pandas as pd
+
+# Example DataFrame
+data = {
+    'A': [1, 2, 3, 4],
+    'B': [5, 6, 7, 8]
+}
+
+df = pd.DataFrame(data)
+
+# Function to add values from columns 'A' and 'B'
+def sum_columns(row):
+    return row['A'] + row['B']
+
+# Apply the function to create a new column 'C' based on values from 'A' and 'B'
+df['C'] = df.apply(sum_columns, axis=1)
+
+print("DataFrame with a new column 'C' based on values from 'A' and 'B':")
+print(df)
+
+In this example:
+
+- The 'sum_columns()' function takes a row as an argument and returns the sum of values in columns 'A' and 'B'.
+- 'df.apply(sum_columns, axis=1)' applies the 'sum_columns()' function to each row (axis=1) of the DataFrame 'df'.
+- The result is assigned to a new column 'C' in the DataFrame 'df'.
+
+You can create more complex functions and perform various operations using '.apply()' to derive new columns based on existing column values in your DataFrame.
+
+###################################################################################################################################################################
+
+Question 9: Suppose you want to merge two DataFrames, 'df1' and 'df2,' on a common column 'key.' How would you perform this merge operation in Pandas?
+
+Ans:-
+     In Pandas, to merge two DataFrames, 'df1' and 'df2,' on a common column 'key,' you can use the 'pd.merge()' function. Here's an example:
+
+# python code
+import pandas as pd
+
+# Example DataFrames
+data1 = {
+    'key': ['A', 'B', 'C', 'D'],
+    'value1': [1, 2, 3, 4]
+}
+
+data2 = {
+    'key': ['A', 'B', 'E', 'F'],
+    'value2': [5, 6, 7, 8]
+}
+
+df1 = pd.DataFrame(data1)
+df2 = pd.DataFrame(data2)
+
+# Merge df1 and df2 on the 'key' column
+merged_df = pd.merge(df1, df2, on='key', how='inner')
+
+print("Merged DataFrame:")
+print(merged_df)
+
+In this example:
+
+- 'pd.merge(df1, df2, on='key', how='inner')' merges 'df1' and 'df2' based on the 'key' column, performing an inner join.
+ The 'key' column is used as the common column for merging.
+- 'how='inner'' specifies the type of merge operation (inner join in this case). Other common options for the 'how' parameter include 'left',
+ 'right', and 'outer' for different types of joins.
+
+The resulting 'merged_df''will contain the columns from both 'df1' and 'df2' where the 'key' values are matching.
+
+Adjust the 'how' parameter according to your desired type of join (inner, outer, left, right) based on your specific merging requirements.
+
+####################################################################################################################################################################
+
+Question 10: You have a DataFrame with a column containing messy text data. How can you clean and standardize the text data (e.g., remove punctuation and convert to 
+lowercase) in that column?
+
+Ans:- 
+To clean and standardize text data in a DataFrame column, you can use string manipulation functions in Pandas along with regular expressions 
+to remove punctuation and convert text to lowercase. Here's an example:
+
+# python code
+import pandas as pd
+import string
+
+# Example DataFrame with messy text data
+data = {
+    'TextData': ['This is some messy text!',
+                 'It has punctuation...',
+                 'And may contain UPPERCASE letters!!!']
+}
+
+df = pd.DataFrame(data)
+
+# Function to clean text data
+def clean_text(text):
+    # Remove punctuation using translate() and string.punctuation
+    translator = str.maketrans('', '', string.punctuation)
+    text = text.translate(translator)
+    
+    # Convert text to lowercase
+    text = text.lower()
+    
+    return text
+
+# Clean and standardize the 'TextData' column
+df['CleanedText'] = df['TextData'].apply(clean_text)
+
+print("DataFrame with cleaned and standardized text data:")
+print(df)
+
+
+In this example:
+
+- 'clean_text()' is a function that takes a text input, removes punctuation using 'translate()' with 'string.punctuation', and converts the text to lowercase.
+- 'df['TextData'].apply(clean_text)' applies the 'clean_text()' function to each element in the 'TextData' column using 'apply()',
+ and the result is stored in a new column 'CleanedText' in the DataFrame `df`.
+
+Modify the 'clean_text()' function or add additional cleaning steps (such as removing digits, stopwords, etc.) based on your specific text cleaning requirements.
+
+
+
